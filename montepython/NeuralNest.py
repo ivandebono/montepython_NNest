@@ -273,11 +273,15 @@ def run(cosmo, data, command_line):
 
 
 def from_NN_output_to_chains(folder):
-    print(folder)
-    chains, logzs, nlikes = [], [], []
-    for fileroot in glob.glob(folder + '/*/chains/'):
+    
+    absfolder='/'+os.path.expanduser(folder) # Works on the CC-IN2P3 CLUSTER. 
+    print('Converting ', folder, ' to MontePython chains')
+    chains, logzs, nlikes, chainfiles = [], [], [], []
+    for fileroot in glob.glob(absfolder + '/*/chains/'):
         if os.path.isfile(os.path.join(fileroot, 'chain.txt')): 
-            chains.append(np.load(os.path.join(fileroot, 'chain.txt')))
+            chainfile=os.path.join(fileroot, 'chain.txt')
+            chainfiles.append(chainfile)
+            chains.append(np.loadtxt(chainfile))
         if os.path.exists(os.path.join(fileroot, '..', 'run_results', 'results.csv')):
             results = pd.read_csv(os.path.join(fileroot, '..', 'run_results', 'results.csv'))
             print(results)
@@ -297,5 +301,6 @@ def from_NN_output_to_chains(folder):
         print(r'Log z: %4.2f \pm %4.2f' % (logzs_mean, logzs_error))
         print(r'Number of likelihood evaluations: %.0f \pm %.0f' % (nlikes_mean, nlikes_error))
         print('')
-    for ic in len(chains):
-        np.savetxt(os.path.join(folder.rstrip(NN_subfolder), 'chain__%s.txt' % ic), chains[ic])
+
+    for ic in np.arange(len(chainfiles)):
+        np.savetxt(os.path.join(absfolder.rstrip(NN_subfolder), 'chain__%s.txt' % str(ic+1)), chains[ic], fmt='%.6e')
