@@ -113,7 +113,7 @@ def initialise(cosmo, data, command_line):
     data.NN_arguments['x_dim'] = len(varying_param_names)
     data.NN_arguments['num_derived'] =  len(derived_param_names)
     data.NN_arguments['verbose'] = True
-    data.NN_arguments['log_dir'] = os.path.join(NN_folder, str(run_num))
+    data.NN_arguments['log_dir'] = os.path.join(NN_folder, 'run'+str(run_num))
     data.NN_arguments['use_gpu'] = False
     data.NN_arguments['flow'] = 'nvp'
     data.NN_arguments['load_model'] = ''
