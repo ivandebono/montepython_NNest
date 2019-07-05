@@ -273,20 +273,26 @@ def run(cosmo, data, command_line):
 
 
 def from_NN_output_to_chains(folder):
-    
-    absfolder='/'+os.path.expanduser(folder) # Works on the CC-IN2P3 CLUSTER. 
+
+    """
+    Do not use absolute paths with ~ in folder name.
+    """
+
     print('Converting ', folder, ' to MontePython chains')
     chains, logzs, nlikes, chainfiles = [], [], [], []
-    for fileroot in glob.glob(absfolder + '/*/chains/'):
+
+    for fileroot in glob.glob(folder + '/*/chains/'):
+        print('FILEROOT',fileroot)
         if os.path.isfile(os.path.join(fileroot, 'chain.txt')): 
             chainfile=os.path.join(fileroot, 'chain.txt')
             chainfiles.append(chainfile)
             chains.append(np.loadtxt(chainfile))
-        if os.path.exists(os.path.join(fileroot, '..', 'run_results', 'results.csv')):
-            results = pd.read_csv(os.path.join(fileroot, '..', 'run_results', 'results.csv'))
+
+        if os.path.exists(os.path.join(fileroot, '..', 'results', 'results.csv')):
+            results = pd.read_csv(os.path.join(fileroot, '..', 'results', 'results.csv'))
             print(results)
-        if os.path.exists(os.path.join(fileroot, '..', 'run_results', 'final.csv')):
-            final = pd.read_csv(os.path.join(fileroot, '..', 'run_results', 'final.csv'))
+        if os.path.exists(os.path.join(fileroot, '..', 'results', 'final.csv')):
+            final = pd.read_csv(os.path.join(fileroot, '..', 'results', 'final.csv'))
             logzs.append(final['logz'])
             nlikes.append(final['ncall'])
     if len(logzs) > 0:
@@ -303,4 +309,4 @@ def from_NN_output_to_chains(folder):
         print('')
 
     for ic in np.arange(len(chainfiles)):
-        np.savetxt(os.path.join(absfolder.rstrip(NN_subfolder), 'chain__%s.txt' % str(ic+1)), chains[ic], fmt='%.6e')
+        np.savetxt(os.path.join(folder.rstrip(NN_subfolder), 'chain__%s.txt' % str(ic+1)), chains[ic])
