@@ -309,4 +309,4 @@ def from_NN_output_to_chains(folder):
         print('')
 
     for ic in np.arange(len(chainfiles)):
-        np.savetxt(os.path.join(folder.rstrip(NN_subfolder), 'chain__%s.txt' % str(ic+1)), chains[ic])
+        np.savetxt(os.path.join(folder.rstrip(NN_subfolder), 'chain__%s.txt' % str(ic+1)), chains[ic], fmt='%.6e')
