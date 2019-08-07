@@ -102,7 +102,7 @@ def initialise(cosmo, data, command_line):
                 'parameters. Set reasonable bounds for them in the ".param"' +
                 'file.')
 
-    # If absent, create the sub-folder NN
+    # If absent, create the sub-folder NS
     NN_folder = os.path.join(command_line.folder, NN_subfolder)
     if not os.path.exists(NN_folder):
         os.makedirs(NN_folder)
@@ -165,7 +165,7 @@ def run(cosmo, data, command_line):
         def prior(cube):
             # NN uses cube -1 to 1 so convert to 0 to 1
             cube = cube / 2 + 0.5
-            if len(cube.shape) == 1:
+            if len(np.shape(cube)) == 1:
                 theta = [0.0] * nDims
                 for i, name in enumerate(data.NN_param_names):
                     theta[i] = data.mcmc_parameters[name]['prior'] \
