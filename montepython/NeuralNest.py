@@ -285,6 +285,7 @@ def from_NN_output_to_chains(folder):
         if os.path.isfile(os.path.join(fileroot, 'chain.txt')): 
             chainfiles.append(os.path.join(fileroot, 'chain.txt'))
 
+
         if os.path.exists(os.path.join(fileroot, '..', 'results', 'results.csv')):
             results = pd.read_csv(os.path.join(fileroot, '..', 'results', 'results.csv'))
             print(results)
@@ -308,3 +309,4 @@ def from_NN_output_to_chains(folder):
     for ic in np.arange(len(chainfiles)):
         np.savetxt(os.path.join(folder.rstrip(NN_subfolder), 'chain__%s.txt' % str(ic+1)),
                      np.loadtxt(chainfiles[ic]), fmt='%.6e')
+

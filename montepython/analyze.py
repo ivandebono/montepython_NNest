@@ -189,7 +189,9 @@ def prepare(files, info):
         Used to store the result
 
     """
+
     # Modified by Ivan Debono
+    #
     # First test if the folder is a MultiNest, PolyChord, CosmoHammer, or NeuralNest folder.
     # If so, call the module's own routine through the clean conversion
     # function, which will translate the output of this other sampling into
@@ -1876,7 +1878,6 @@ def remove_bad_points(info):
 def compute_mean(mean, spam, total):
     """
     """
-
     for i in xrange(np.shape(mean)[1]):
         for j in xrange(len(spam)):
             submean = np.sum(spam[j][:, 0]*spam[j][:, i+2])

@@ -4,7 +4,11 @@
 #Planck_highl.path_clik = os.path.join(data.path['clik'], '../CAMspec_v6.2TN_2013_02_26_dist.clik')
 
 # For Planck 2015 release:
+<<<<<<< HEAD
 Planck_highl.path_clik = os.path.join(data.path['clik'],'plc_2.0/hi_l/plik/plik_dx11dr2_HM_v18_TT.clik')
+=======
+Planck_highl.path_clik = os.path.join(data.path['clik'],'../plc_2.0/hi_l/plik/plik_dx11dr2_HM_v18_TT.clik')
+>>>>>>> 6fad4680ec50686c1129422c642b8ed1fdfe76bc
 Planck_highl.A_planck_prior_center            = 1
 Planck_highl.A_planck_prior_variance          = 0.0025
 Planck_highl.calib_100T_prior_center          = 0.9990004

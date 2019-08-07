@@ -15,7 +15,9 @@ The MCMC sampler (in development) can be invoked by
 where bootstrap_fileroot gives the root directory of some initial chains used to train the network. This is similar to
 estimating the covariance matrix and using the Cholesky decomposition for the proposal directions.
 
-NeuralNest does not output chains for derived parameters.
+
+NEED TO CHECK: NeuralNest does not output chains for derived parameters.
+
 
 Please cite [Moss (2019)](https://arxiv.org/abs/1903.10860) if you find the
 package useful in your research, along with the relevant MontePython references.
